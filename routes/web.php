@@ -12,5 +12,11 @@
 */
 
 Route::get('/', function () {
+    // テスト用のユーザーデータをファクトリーで作成
+    $user = factory(App\User::class)->create();
+
+    // イベントを生成
+    event(new App\Events\OrderShipped($user));
+
     return view('welcome');
 });
