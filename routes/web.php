@@ -12,11 +12,33 @@
 */
 
 Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/log', function () {
     // テスト用のユーザーデータをファクトリーで作成
     $user = factory(App\User::class)->create();
 
     // イベントを生成
     event(new App\Events\OrderShipped($user));
-
-    return view('welcome');
 });
+
+Route::get('/foo', function () {
+    return 'Hello World';
+});
+
+// Route::get('user/{id}', function ($id) {
+//     return 'User '.$id;
+// });
+
+Route::get('user/{name?}', function ( $name='Jack' ) {
+    return 'User '.$name ;
+});
+
+Route::get('posts/{post}/{comment}', function($postId,$comment){
+    return 'postID:'.$postId.',comment:'.$comment;
+});
+
+Route::get('username/{name?}', function ($name='Jack' ) {
+    return 'User '.$name ;
+})->where('name','[A-Za-z]+');
