@@ -1,5 +1,7 @@
 <?php
 
+use App\Notifications\InvoicePaid;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +15,11 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/slack', function () {
+    $user = new App\User;
+    $user->notify(new \App\Notifications\SlackPosted);
 });
 
 Route::get('/log', function () {
